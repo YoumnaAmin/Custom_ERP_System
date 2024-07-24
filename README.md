@@ -1,4 +1,4 @@
-# Custom ERP System for Small Businesses
+# Custom ERP System
 
 ## Introduction
 Welcome to the Custom ERP System designed specifically for small businesses, startups, and home businesses. This ERP system aims to streamline operations with four main modules: Orders, Menu, Inventory, and Customer Management. Built with Flask, Python, and SQLite, it provides a user-friendly interface to manage essential business processes efficiently.
