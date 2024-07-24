@@ -10,18 +10,18 @@ Check out the live demo of our ERP system [here](#).
 Read the full project blog article [here](#).
 
 ### Author
-Connect with the author on LinkedIn: [Yumna](#).
+Connect with the author on LinkedIn: [https://www.linkedin.com/in/youmna-amin-34a8ba21b/](#).
 
 ## Installation
 To get a local copy up and running, follow these steps:
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/erp-system.git
+    git clone https://github.com/YoumnaAmin/Custom_ERP.git
     ```
 2. **Navigate to the project directory:**
     ```bash
-    cd erp-system
+    cd Custom_ERP
     ```
 3. **Create a virtual environment:**
     ```bash
@@ -72,8 +72,8 @@ Upon running the application, you will have access to the following modules:
    - Manage inventory levels
 
 ### Screenshots
-![Dashboard Screenshot](#)
-![Orders Module Screenshot](#)
+![Dashboard Screenshot](screenshots/dashboard.png)
+![Orders Module Screenshot](screenshots/order.png)
 ![Inventory Module Screenshot](#)
 
 ## Contributing
