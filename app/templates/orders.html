@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <h1 class="mb-4">Orders</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Orders History</h2>
+            {% for order in orders %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="card-title">
+                        <a href="{{ url_for('order_details', order_id=order.id) }}">{{ order.id }}</a>
+                    </h2>
+                    <p class="card-text"><strong>Customer:</strong> {{ order.client.name }}</p>
+                    <p class="card-text"><strong>Order:</strong> {{ order.item }}</p>
+                    <p class="card-text"><strong>Date:</strong> {{ order.date }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-4">
+            <a href="{{ url_for('new_order_page') }}" class="btn btn-primary float-end">New Order</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Order {{ order.id }} Details</h1>
+<form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.customer_name.label(class="form-control-label") }}
+        {{ form.customer_name(class="form-control form-control-lg") }}
+    </div>
+    <div class="form-group">
+        {{ form.address.label(class="form-control-label") }}
+        {{ form.address(class="form-control form-control-lg") }}
+    </div>
+    <div class="form-group">
+        {{ form.phone.label(class="form-control-label") }}
+        {{ form.phone(class="form-control form-control-lg") }}
+    </div>
+    <div class="form-group">
+        {{ form.date.label(class="form-control-label") }}
+        {{ form.date(class="form-control form-control-lg") }}
+    </div>
+    <h3>Items</h3>
+    <div id="items-container">
+        {% for item, quantity in order_items_with_quantities %}
+        <div class="item-row">
+            <input type="text" name="order" value="{{ item }}" class="form-control" readonly>
+            <input type="number" name="quantity" value="{{ quantity }}" class="form-control">
+            <button type="button" class="btn btn-danger remove-item">Remove</button>
+        </div>
+        {% endfor %}
+    </div>
+    <button type="button" id="add-item" class="btn btn-primary">Add Another Item</button>
+    <div class="form-group mt-3">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+
+<script>
+document.getElementById('add-item').addEventListener('click', function() {
+    var container = document.getElementById('items-container');
+    var newItemRow = document.createElement('div');
+    newItemRow.className = 'item-row';
+    newItemRow.innerHTML = `
+        <input type="text" name="order" class="form-control" placeholder="Item Name">
+        <input type="number" name="quantity" class="form-control" placeholder="Quantity">
+        <button type="button" class="btn btn-danger remove-item">Remove</button>
+    `;
+    container.appendChild(newItemRow);
+});
+
+document.getElementById('items-container').addEventListener('click', function(event) {
+    if (event.target.classList.contains('remove-item')) {
+        event.target.parentElement.remove();
+    }
+});
+</script>
+{% endblock %}
