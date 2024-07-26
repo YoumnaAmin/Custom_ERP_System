@@ -35,8 +35,6 @@ class OrderForm(FlaskForm):
     customer_name = StringField('Customer Name', validators=[DataRequired()])
     address = StringField('Address')
     phone = StringField('Phone', validators=[DataRequired()])
-    order = SelectField('Order', choices=[], validators=[DataRequired()])  # Choices will be populated dynamically
-    quantity = IntegerField('Quantity', validators=[DataRequired()])
     date = DateField('Date', format='%Y-%m-%d', validators=[DataRequired()])
     items = FieldList(FormField(OrderItemForm), min_entries=1, max_entries=10)
     submit = SubmitField('Submit Order')

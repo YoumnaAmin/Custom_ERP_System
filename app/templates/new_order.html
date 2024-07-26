@@ -2,7 +2,7 @@
 {% block content %}
 <div class="content-section">
     <h1>New Order Form</h1>
-    <form method="POST" action="">
+    <form method="POST" action="{{ url_for('orders_bp.new_order_page') }}">
         {{ form.hidden_tag() }}
         <div class="form-group">
             {{ form.customer_name.label(class="form-control-label") }}
@@ -23,17 +23,18 @@
         <div class="form-group">
             <label for="items">Items</label>
             <div id="items-container">
-                <!-- Initial item fields -->
+                {% for item_form in form.items %}
                 <div class="item-form">
                     <div class="form-group">
-                        <label for="item">Item</label>
-                        <input type="text" class="form-control" name="item" required>
+                        {{ item_form.item.label(class="form-control-label") }}
+                        {{ item_form.item(class="form-control") }}
                     </div>
                     <div class="form-group">
-                        <label for="quantity">Quantity</label>
-                        <input type="number" class="form-control" name="quantity" required>
+                        {{ item_form.quantity.label(class="form-control-label") }}
+                        {{ item_form.quantity(class="form-control") }}
                     </div>
                 </div>
+                {% endfor %}
             </div>
             <button type="button" class="btn btn-success" id="add-item">+ Add Item</button>
         </div>
@@ -47,7 +48,7 @@
 document.getElementById("phone").addEventListener("blur", function() {
     var phone = this.value;
     if (phone) {
-        fetch(`{{ url_for('new_order_page') }}?phone=${phone}`)
+        fetch(`{{ url_for('orders_bp.new_order_page') }}?phone=${phone}`)
             .then(response => response.json())
             .then(data => {
                 if (data.name) {
@@ -60,16 +61,21 @@ document.getElementById("phone").addEventListener("blur", function() {
 
 document.getElementById("add-item").addEventListener("click", function() {
     var container = document.getElementById("items-container");
+    var index = container.children.length;  // Get the number of existing items
     var newItemForm = document.createElement("div");
     newItemForm.className = "item-form";
     newItemForm.innerHTML = `
         <div class="form-group">
-            <label for="item">Item</label>
-            <input type="text" class="form-control" name="item" required>
+            <label for="item-${index}">Item</label>
+            <select class="form-control" name="items-${index}-item">
+                {% for item in form.items[0].item.choices %}
+                <option value="{{ item[0] }}">{{ item[1] }}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="form-group">
-            <label for="quantity">Quantity</label>
-            <input type="number" class="form-control" name="quantity" required>
+            <label for="quantity-${index}">Quantity</label>
+            <input type="number" class="form-control" name="items-${index}-quantity" required>
         </div>
         <button type="button" class="btn btn-danger btn-sm remove-item">Remove</button>
     `;

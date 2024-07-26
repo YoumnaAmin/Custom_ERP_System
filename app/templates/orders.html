@@ -5,21 +5,30 @@
     <div class="row">
         <div class="col-md-8">
             <h2>Orders History</h2>
-            {% for order in orders %}
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h2 class="card-title">
-                        <a href="{{ url_for('order_details', order_id=order.id) }}">{{ order.id }}</a>
-                    </h2>
-                    <p class="card-text"><strong>Customer:</strong> {{ order.client.name }}</p>
-                    <p class="card-text"><strong>Order:</strong> {{ order.item }}</p>
-                    <p class="card-text"><strong>Date:</strong> {{ order.date }}</p>
+            {% if orders %}
+                {% for order in orders %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            <a href="{{ url_for('orders_bp.order_details', order_id=order.id) }}">{{ order.id }}</a>
+                        </h2>
+                        <p class="card-text"><strong>Customer:</strong> {{ order.client.name }}</p>
+                        <p class="card-text"><strong>Date:</strong> {{ order.date }}</p>
+                        <p class="card-text"><strong>Items:</strong></p>
+                        <ul>
+                            {% for item in order.items %}
+                            <li>{{ item.item }} - Quantity: {{ item.quantity }} - Price: ${{ item.price }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+                <p>No orders found.</p>
+            {% endif %}
         </div>
         <div class="col-md-4">
-            <a href="{{ url_for('new_order_page') }}" class="btn btn-primary float-end">New Order</a>
+            <a href="{{ url_for('orders_bp.new_order_page') }}" class="btn btn-primary float-end">New Order</a>
         </div>
     </div>
 </div>

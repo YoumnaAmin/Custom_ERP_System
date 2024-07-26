@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1>Order {{ order.id }} Details</h1>
-<form method="POST" action="">
+<form method="POST" action="{{ url_for('orders_bp.order_details', order_id=order.id) }}">
     {{ form.hidden_tag() }}
     <div class="form-group">
         {{ form.customer_name.label(class="form-control-label") }}
@@ -33,6 +33,11 @@
     <div class="form-group mt-3">
         {{ form.submit(class="btn btn-primary") }}
     </div>
+</form>
+
+<!-- Delete Order Form -->
+<form method="POST" action="{{ url_for('orders_bp.delete_order', order_id=order.id) }}" class="mt-3">
+    <button type="submit" class="btn btn-danger">Delete Order</button>
 </form>
 
 <script>
