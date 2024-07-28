@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 from flask_wtf import FlaskForm
-from wtforms import StringField,FormField, FieldList, PasswordField, SubmitField, BooleanField, SelectField, IntegerField, DateField
+from wtforms import StringField,FormField, FieldList, PasswordField, SubmitField, BooleanField, SelectField, IntegerField, DateField, DecimalField
 from wtforms.validators import DataRequired, length, Email, EqualTo, ValidationError
 from app.models import Employee
 
@@ -38,3 +38,8 @@ class OrderForm(FlaskForm):
     date = DateField('Date', format='%Y-%m-%d', validators=[DataRequired()])
     items = FieldList(FormField(OrderItemForm), min_entries=1, max_entries=10)
     submit = SubmitField('Submit Order')
+
+class MenuItemForm(FlaskForm):
+    name = StringField('Item Name', validators=[DataRequired()])
+    price = DecimalField('Price', validators=[DataRequired()])
+    submit = SubmitField('Save')

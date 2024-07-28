@@ -2,7 +2,6 @@ from app.models import Order, Client, Menu, OrderItem
 from app.form import OrderForm, OrderItemForm
 from app import db
 from flask import jsonify, Blueprint, render_template, url_for, flash, redirect, request
-from wtforms import SelectField, IntegerField, StringField, DateField, FieldList, FormField, SubmitField
 
 orders_bp = Blueprint('orders_bp', __name__)
 

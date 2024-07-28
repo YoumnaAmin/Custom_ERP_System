@@ -1,6 +1,44 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Menu</h1>
-    <p>This is the Menu page.</p>
-    <!-- Add more content here as needed -->
+<h1>Menu</h1>
+<form method="POST" action="{{ url_for('menu_bp.menu_page') }}">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.name.label(class="form-control-label") }}
+        {{ form.name(class="form-control form-control-lg") }}
+    </div>
+    <div class="form-group">
+        {{ form.price.label(class="form-control-label") }}
+        {{ form.price(class="form-control form-control-lg") }}
+    </div>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+
+<h2>Existing Menu Items</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in menu_items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>${{ item.price }}</td>
+            <td>
+                <a href="{{ url_for('menu_bp.edit_menu_item', item_id=item.id) }}" class="btn btn-secondary">Edit</a>
+                <form method="POST" action="{{ url_for('menu_bp.delete_menu_item', item_id=item.id) }}" style="display:inline;">
+                    {{ form.hidden_tag() }}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

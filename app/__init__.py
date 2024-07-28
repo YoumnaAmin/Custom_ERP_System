@@ -16,9 +16,14 @@ migrate = Migrate(app, db)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 
+
+from app.menu_routes import menu_bp
+app.register_blueprint(menu_bp)
+
 # Import blueprints and register them
 from app.orders_routes import orders_bp
 app.register_blueprint(orders_bp, url_prefix='/orders')
+
 
 # Import routes after registering blueprints
 from app import routes
