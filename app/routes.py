@@ -7,7 +7,7 @@ from flask import render_template, url_for, flash, redirect, request, current_ap
 from flask_login import login_user, current_user, logout_user
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/login", methods=['GET', 'POST'])
 def login_page():
     if current_user.is_authenticated:
         return redirect(url_for('home_page'))

@@ -15,27 +15,36 @@
         <header class="site-header">
             <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
               <div class="container">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Corrected 'data-toggle' to 'data-bs-toggle' and 'data-target' to 'data-bs-target' for Bootstrap 5 -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarToggle">
-                  <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link" href="{{url_for('home_page')}}">Home</a>
-                  </div>
-                  <!-- Navbar Right Side -->
-                  <div class="navbar-nav">
+                  <!-- Updated margin classes to fit Bootstrap 5 standards -->
+                  <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('home_page') }}">Home</a>
+                    </li>
+                  </ul>
+                  <ul class="navbar-nav">
                     {% if current_user.is_authenticated %}
-                      <a class="nav-item nav-link" href="{{ url_for('logout') }}">Logout</a>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                      </li>
                     {% else %}
-                      <a class="nav-item nav-link" href="{{ url_for('login_page') }}">Login</a>
-                      <a class="nav-item nav-link" href="{{ url_for('register_page') }}">Register</a>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login_page') }}">Login</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('register_page') }}">Register</a>
+                      </li>
                     {% endif %}
-                  </div>
+                  </ul>
                 </div>
               </div>
             </nav>
         </header>
-        <main role="main" class="container">
+        <main role="main" class="container mt-5 pt-5">
             <div class="row">
               <div class="col-md-8">
                 {% with messages = get_flashed_messages(with_categories=true) %}

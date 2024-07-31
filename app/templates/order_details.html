@@ -41,6 +41,9 @@
     </div>
 </form>
 
+<!-- Display Total Price -->
+<h3>Total Price: ${{ total_price }}</h3>
+
 <!-- Delete Order Form -->
 <form method="POST" action="{{ url_for('orders_bp.delete_order', order_id=order.id) }}" class="mt-3">
     {{ form.hidden_tag() }}

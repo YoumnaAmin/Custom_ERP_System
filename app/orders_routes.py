@@ -167,7 +167,9 @@ def order_details(order_id):
             item_form.quantity.data = item.quantity
             form.items.append_entry(item_form)
 
-    return render_template('order_details.html', title=f"Order {order.id}", order=order, form=form, client=client, menu_items=menu_items)
+    total_price = sum(item.price * item.quantity for item in OrderItem.query.filter_by(order_id=order.id).all())
+
+    return render_template('order_details.html', title=f"Order {order.id}", order=order, form=form, client=client, menu_items=menu_items, total_price=total_price)
 
 @orders_bp.route("/order/<int:order_id>/delete", methods=['POST'])
 def delete_order(order_id):
